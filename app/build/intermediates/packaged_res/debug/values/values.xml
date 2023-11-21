@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="items_option">
+        <item>Ubah</item>
+        <item>Hapus</item>
+        <item>Batal</item>
+    </string-array>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <string name="app_name">PPPB-CRUD</string>

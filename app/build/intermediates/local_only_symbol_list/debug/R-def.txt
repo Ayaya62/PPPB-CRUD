@@ -1,5 +1,6 @@
 R_DEF: Internal format may change without notice
 local
+array items_option
 color black
 color white
 drawable baseline_playlist_add_24

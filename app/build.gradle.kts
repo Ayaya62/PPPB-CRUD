@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+
 }
 
 android {
@@ -47,4 +49,5 @@ dependencies {
 
     implementation ("androidx.room:room-runtime:2.6.0")
     annotationProcessor ("androidx.room:room-compiler:2.6.0")
+    kapt("androidx.room:room-compiler:2.6.0")
 }

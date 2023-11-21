@@ -1,9 +1,11 @@
 package com.example.pppb_crud
 
 import android.annotation.SuppressLint
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,6 +32,30 @@ class MainActivity : AppCompatActivity() {
 
         database = AppData.getInstance(applicationContext)
         adapter = UserAdapter(list)
+        adapter.setDialog(object : UserAdapter.Dialog{
+            override fun onClick(position: Int) {
+                val dialog = AlertDialog.Builder(this@MainActivity)
+                dialog.setTitle(list[position].fullName)
+                dialog.setItems(R.array.items_option, DialogInterface.OnClickListener{
+                    dialog, which ->
+                    if (which == 0){
+                        val intent = Intent(this@MainActivity, EditorActivity::class.java)
+                        intent.putExtra("id", list[position].uid)
+                        startActivity(intent)
+                    }
+                    else if (which == 1){
+                        database.userDao().delete(list[position])
+                        getData()
+                    }
+                    else{
+                        dialog.dismiss()
+                    }
+                })
+                val dialogView = dialog.create()
+                dialogView.show()
+            }
+
+        })
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(applicationContext, VERTICAL, false)
